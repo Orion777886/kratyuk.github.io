@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Кратюк Валентин - Менеджер по закупкам</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #1a3a5f;
+            --secondary: #2c5a8b;
+            --accent: #ff6b35;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --gray: #6c757d;
+        }
+
+        body {
+            background-color: #f0f4f8;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Шапка и навигация */
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 20px 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        .logo span {
+            color: var(--accent);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 25px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 8px 12px;
+            border-radius: 4px;
+        }
+
+        nav ul li a:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Герой секция */
+        .hero {
+            background: linear-gradient(rgba(26, 58, 95, 0.9), rgba(26, 58, 95, 0.9)), url('https://crimea-horeca.ru/wp-content/uploads/2025/06/f9adbb275ff31ab154bc7deaace15fcf_m.jpg');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 100px 0;
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero p {
+            font-size: 1.4rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--accent);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 1.1rem;
+        }
+
+        .btn:hover {
+            background-color: #e05a2a;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Секции */
+        section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            position: relative;
+            display: inline-block;
+            padding-bottom: 15px;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background-color: var(--accent);
+        }
+        /* Обо мне */
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+
+        .about-img {
+            flex: 1;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .about-img img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+
+        .about-img:hover img {
+            transform: scale(1.05);
+        }
+
+        .about-text {
+            flex: 1;
+        }
+
+        .about-text h3 {
+            font-size: 1.8rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+
+        .about-text p {
+            margin-bottom: 15px;
+            color: var(--gray);
+        }
+
+        /* Навыки */
+        .skills {
+            background-color: var(--light);
+        }
+
+        .skills-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .skill-card {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .skill-card i {
+            font-size: 3rem;
+            color: var(--accent);
+            margin-bottom: 20px;
+        }
+
+        .skill-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+
+        /* Опыт */
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 4px;
+            background-color: var(--accent);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -2px;
+        }
+
+        .timeline-item {
+            padding: 20px 40px;
+            position: relative;
+            width: 50%;
+            box-sizing: border-box;
+        }
+
+        .timeline-item:nth-child(odd) {
+            left: 0;
+        }
+
+        .timeline-item:nth-child(even) {
+            left: 50%;
+        }
+
+        .timeline-content {
+            padding: 30px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .timeline-content h3 {
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .timeline-content .date {
+            color: var(--accent);
+            font-weight: 600;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        /* Контакты */
+        .contact {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+        }
+
+        .contact .section-title h2 {
+            color: white;
+        }
+
+        .contact-container {
+            display: flex;
+            gap: 50px;
+        }
+
+        .contact-info {
+            flex: 1;
+        }
+
+        .contact-info h3 {
+            font-size: 1.8rem;
+            margin-bottom: 30px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 25px;
+        }
+
+        .contact-item i {
+            font-size: 1.5rem;
+            color: var(--accent);
+            margin-right: 15px;
+            min-width: 30px;
+        }
+
+        .contact-form {
+            flex: 1;
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .contact-form h3 {
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--gray);
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: border 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            border-color: var(--accent);
+            outline: none;
+        }
+
+        .form-group textarea {
+            height: 150px;
+            resize: vertical;
+        }
+
+        /* Футер */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 30px 0;
+            text-align: center;
+        }
+
+        .social-links {
+            margin-bottom: 20px;
+        }
+
+        .social-links a {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            margin: 0 10px;
+            color: white;
+            line-height: 40px;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background-color: var(--accent);
+            transform: translateY(-5px);
+        }
+
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            nav ul {
+                margin-top: 20px;
+            }
+
+            .about-content {
+                flex-direction: column;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .timeline::after {
+                left: 31px;
+            }
+
+            .timeline-item {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 25px;
+            }
+
+            .timeline-item:nth-child(even) {
+                left: 0;
+            }
+
+            .contact-container {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 480px) {
+            nav ul {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            nav ul li {
+                margin-left: 0;
+            }
+
+            .hero {
+                padding: 60px 0;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .section-title h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Шапка -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">Закупки<span>Профи</span></div>
+            <nav>
+                <ul>
+                    <li><a href="#about">Обо мне</a></li>
+                    <li><a href="#skills">Навыки</a></li>
+                    <li><a href="#experience">Опыт</a></li>
+                    <li><a href="#contact">Контакты</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Герой секция -->
+    <section class="hero">
+        <div class="container hero-content">
+            <h1>Валентин Кратюк</h1>
+            <p>Профессиональный менеджер по закупкам с 10-летним опытом</p>
+            <p>Оптимизация расходов, эффективные поставки, надежные партнерства</p>
+            <a href="#contact" class="btn">Связаться со мной</a>
+        </div>
+    </section>
+
+    <!-- Обо мне -->
+    <section id="about">
+        <div class="container">
+            <div class="section-title">
+                <h2>Обо мне</h2>
+            </div>
+            <div class="about-content">
+                <div class="about-img">
+                    <img src="https://crimea-horeca.ru/wp-content/uploads/2025/06/photos_rdroksm11k.jpg" alt="Валентин Кратюк">
+                </div>
+                <div class="about-text">
+                    <h3>Профессионал в сфере закупок</h3>
+                    <p>Здравствуйте! Меня зовут Валентин Кратюк, и я являюсь менеджером по закупкам с многолетним опытом работы в различных отраслях промышленности.</p>
+                    <p>Моя специализация — оптимизация процессов закупок, снижение затрат и построение долгосрочных партнерских отношений с поставщиками. Я уверен, что эффективная закупочная деятельность — это ключевой фактор успеха любого бизнеса.</p>
+                    <p>Я постоянно совершенствую свои знания, слежу за рыночными тенденциями и новыми технологиями в сфере снабжения и логистики.</p>
+                    <a href="#contact" class="btn">Начать сотрудничество</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Навыки -->
+    <section id="skills" class="skills">
+        <div class="container">
+            <div class="section-title">
+                <h2>Мои навыки</h2>
+            </div>
+            <div class="skills-container">
+                <div class="skill-card">
+                    <i class="fas fa-file-contract"></i>
+                    <h3>Управление закупками</h3>
+                    <p>Разработка и внедрение стратегий закупок, управление поставщиками, ведение переговоров, заключение контрактов, контроль исполнения договоров.</p>
+                </div>
+                <div class="skill-card">
+                    <i class="fas fa-chart-line"></i>
+                    <h3>Аналитика и оптимизация</h3>
+                    <p>Анализ расходов, выявление возможностей для экономии, оптимизация закупочных процессов, бюджетирование, отчетность по закупочной деятельности.</p>
+                </div>
+                <div class="skill-card">
+                    <i class="fas fa-handshake"></i>
+                    <h3>Управление поставщиками</h3>
+                    <p>Поиск и оценка поставщиков, ведение переговоров, управление взаимоотношениями, разрешение конфликтных ситуаций, оценка эффективности партнеров.</p>
+                </div>
+                <div class="skill-card">
+                    <i class="fas fa-truck-loading"></i>
+                    <h3>Логистика и снабжение</h3>
+                    <p>Планирование поставок, управление запасами, контроль сроков доставки, управление складской логистикой.</p>
+                </div>
+                <div class="skill-card">
+                    <i class="fas fa-balance-scale"></i>
+                    <h3>Юридические аспекты</h3>
+                    <p>Знание законодательства в сфере госзакупок (44-ФЗ, 223-ФЗ), подготовка конкурсной документации, участие в тендерах, правовая экспертиза договоров.</p>
+                </div>
+                <div class="skill-card">
+                    <i class="fas fa-laptop"></i>
+                    <h3>Программное обеспечение</h3>
+                    <p>Опыт работы с 1C, HRS Back Office, ФГИС «Меркурий», Microsoft Office, электронными торговыми площадками (Сбербанк-АСТ, B2B-Center)</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Опыт работы -->
+    <section id="experience">
+        <div class="container">
+            <div class="section-title">
+                <h2>Опыт работы</h2>
+            </div>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>Менеджер по закупкам</h3>
+                        <span class="date">2016 - настоящее время</span>
+                        <p><strong>ООО "УК Риэлт Менеджмент"</strong></p>
+                        <ul>
+                            <li>Построение и оптимизация бизнес-процессов закупок с целью централизации и повышения эффективности.</li>
+                            <li>Разработка и внедрение стратегии закупок</li>
+                            <li>Организация снабжения компании товарами на выгодных условиях: формирование заказов, контроль сроков поставок, приемка продукции на склад</li>
+                            <li>Систематический мониторинг рынка для выявления новых поставщиков, анализа цен и условий конкурентов.</li>
+                            <li>Заключение договоров с поставщиками, включая согласование цен, сроков и объемов поставок.</li>
+                            <li>Контроль выполнения договорных обязательств поставщиками, решение претензионных вопросов. </li>
+                            <li>Ведение документооборота с отделами компании (логистика, финансы, производство).</li>
+                            <li>Планирование закупок на основе утвержденного бюджета, корректировка планов в зависимости от потребностей бизнеса.</li>
+                            <li>Управление дебиторской задолженностью: работа с отсрочками, контроль платежей.</li>
+                            <li>Расширение базы поставщиков для снижения рисков и оптимизации закупочной деятельности.  </li>
+                            <li>Урегулирование спорных ситуаций с контрагентами в рамках своей компетенции.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>Индивидуальный предприниматель</h3>
+                        <span class="date">2015 - 2016</span>
+                        <p><strong>Руководитель предприятия</strong></p>
+                        <ul>
+                            <li>Закупка товара</li>
+                            <li>Составление бизнес плана</li>
+                            <li>Анализ рынка сбыта</li>
+                            <li>Маркетинговые решения для увеличения продаж</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>ООО "Новофарм"</h3>
+                        <span class="date">2008 - 2014</span>
+                        <p><strong>Заведующий складским хозяйством</strong></p>
+                        <ul>
+                            <li>Организация и контроль работы склада </li>
+                            <li>Развитие и поддержание клиентской базы</li>
+                            <li>Контроль и обеспечение оптимального запаса запасных частей для удовлетворения нужд клиента</li>
+                            <li>Учет в программе 1С. Взаимодействие с отделами. Сдача мат. отчетов</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>Образование</h3>
+                        <span class="date">2005 - 2010</span>
+                        <p><strong>Национальный аэрокосмический университет "Харьковский авиационный институт" им. Н.Е. Жуковского, Харьков</strong></p>
+                        <p>Факультет экономики, специальность "менеджер информационных технологий"</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Контакты -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <div class="section-title">
+                <h2>Контакты</h2>
+            </div>
+            <div class="contact-container">
+                <div class="contact-info">
+                    <h3>Свяжитесь со мной</h3>
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div>
+                            <h4>Адрес</h4>
+                            <p>г. Евпатория</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <div>
+                            <h4>Телефон</h4>
+                            <p>+7 (978) 137-37-87</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <h4>Email</h4>
+                            <p>v.kratyuk1@yandex.ru</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-clock"></i>
+                        <div>
+                            <h4>Рабочие часы</h4>
+                            <p>Пн-Пт: 9:00 - 18:00</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <h3>Отправить сообщение</h3>
+                    <form>
+                        <div class="form-group">
+                            <label for="name">Ваше имя</label>
+                            <input type="text" id="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Ваш Email</label>
+                            <input type="email" id="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="subject">Тема</label>
+                            <input type="text" id="subject" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Сообщение</label>
+                            <textarea id="message" required></textarea>
+                        </div>
+                        <button type="submit" class="btn">Отправить сообщение</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Футер -->
+    <footer>
+        <div class="container">
+            <div class="social-links">
+                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#"><i class="fab fa-telegram"></i></a>
+                <a href="#"><i class="fab fa-whatsapp"></i></a>
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+            </div>
+            <p>&copy; 2023 Валентин Кратюк. Все права защищены.</p>
+            <p>Менеджер по закупкам</p>
+        </div>
+    </footer>
+
+    <script>
+        // Плавная прокрутка
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Обработка формы
+        const form = document.querySelector('form');
+        if (form) {
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Здесь обычно отправка данных на сервер
+                // Для демо просто покажем сообщение
+                alert('Сообщение отправлено! Я свяжусь с вами в ближайшее время.');
+                form.reset();
+            });
+        }
+    </script>
+</body>
+</html>
